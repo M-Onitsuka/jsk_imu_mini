@@ -1,7 +1,7 @@
 /*
 ******************************************************************************
 * File Name          : madgwick_ahrs.h
-* Description        : ahrs estimation by madgiwck 
+* Description        : ahrs estimation by madgiwck
 ******************************************************************************
 */
 #ifndef __cplusplus
@@ -25,7 +25,12 @@ MadgwickAHRS():EstimatorAlgorithm()
 {
 beta = betaDef; // 2 * proportional gain (Kp)
 }
-
+  void update(const Vector3f& gyro, const Vector3f& acc, const Vector3f& mag){
+    acc_b_ = acc;
+    gyro_b_ = gyro;
+    mag_b_ = mag;
+    estimation();
+  }
 virtual void  estimation()
   {
 #if ESTIMATE_METHOD == ACC_GYRO_MAG
@@ -68,7 +73,7 @@ private:
       recipNorm = inv_sqrt(ax * ax + ay * ay + az * az);
       ax *= recipNorm;
       ay *= recipNorm;
-      az *= recipNorm;   
+      az *= recipNorm;
 
       // Normalise magnetometer measurement
       recipNorm = inv_sqrt(mx * mx + my * my + mz * mz);
@@ -158,7 +163,7 @@ private:
       recipNorm = inv_sqrt(ax * ax + ay * ay + az * az);
       ax *= recipNorm;
       ay *= recipNorm;
-      az *= recipNorm;   
+      az *= recipNorm;
 
       // Auxiliary variables to avoid repeated arithmetic
       _2q0 = 2.0f * q_[0];

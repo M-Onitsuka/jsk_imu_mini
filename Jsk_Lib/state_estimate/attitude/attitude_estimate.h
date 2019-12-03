@@ -42,7 +42,7 @@
 //#define MAHONY 3
 
 /* please change the algorithm type according to your application */
-#define ESTIMATE_TYPE COMPLEMENTARY
+#define ESTIMATE_TYPE MADWICK
 
 class AttitudeEstimate
 {
@@ -76,7 +76,7 @@ public:
     estimator_ = new ComplementaryAHRS();
 #elif ESTIMATE_TYPE == MADWICK
     estimator_ = new MadgwickAHRS();
-#else 
+#else
 #error "no instance for estimator"
 #endif
   }
@@ -109,7 +109,7 @@ public:
         imu_msg_.stamp = nh_->now();
         for(int i = 0; i < 3 ; i ++)
           {
-#if 0 //virtual coord
+#if 1 //use estimator
             imu_msg_.gyro_data[i] = estimator_->getGyroV()[i];
             imu_msg_.mag_data[i] = estimator_->getMagV()[i];
             imu_msg_.acc_data[i] = estimator_->getAccV()[i];
