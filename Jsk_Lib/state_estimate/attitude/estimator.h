@@ -33,8 +33,8 @@ public:
   /* coodrinate change  */
   void coordinateUpdate(float desire_attitude_roll, float desire_attitude_pitch)
   {
-    desire_attitude_roll_ = desire_attitude_roll; 
-    desire_attitude_pitch_ = desire_attitude_pitch; 
+    desire_attitude_roll_ = desire_attitude_roll;
+    desire_attitude_pitch_ = desire_attitude_pitch;
 
     r_.from_euler(desire_attitude_roll_, desire_attitude_pitch_, 0);
 
@@ -92,10 +92,11 @@ public:
   Vector3f getAccB(){return acc_b_;}
   Vector3f getGyroB(){return gyro_b_;}
   Vector3f getMagB(){return mag_b_;}
+  Quaternion getQuaternion(){return q_;}
 
   Vector3f getAccV(){return acc_v_;}
   Vector3f getGyroV(){return gyro_v_;}
-  Vector3f getMagV(){return mag_v_;} 
+  Vector3f getMagV(){return mag_v_;}
 
 protected:
 #if 0
@@ -107,7 +108,7 @@ protected:
   float angles_[3];
   float rpy_[3];
 #endif
-  Vector3f acc_b_, acc_v_;  
+  Vector3f acc_b_, acc_v_;
   Vector3f gyro_b_, gyro_v_;
   Vector3f mag_b_, mag_v_;
 

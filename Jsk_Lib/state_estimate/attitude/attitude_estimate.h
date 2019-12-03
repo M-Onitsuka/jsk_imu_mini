@@ -109,7 +109,7 @@ public:
         imu_msg_.stamp = nh_->now();
         for(int i = 0; i < 3 ; i ++)
           {
-#if 1 //use estimator
+#if 0 //don't use estimator
             imu_msg_.gyro_data[i] = estimator_->getGyroV()[i];
             imu_msg_.mag_data[i] = estimator_->getMagV()[i];
             imu_msg_.acc_data[i] = estimator_->getAccV()[i];
@@ -120,6 +120,12 @@ public:
 #endif
             imu_msg_.angles[i] = estimator_->getAngles()[i];
           }
+
+        //estimated quaternion
+        imu_msg_.quaternion.x = estimation_->q_[0];
+        imu_msg_.quaternion.y = estimation_->q_[1];
+        imu_msg_.quaternion.z = estimation_->q_[2];
+        imu_msg_.quaternion.w = estimation_->q_[3];
 
         imu_pub_->publish(&imu_msg_);
       }

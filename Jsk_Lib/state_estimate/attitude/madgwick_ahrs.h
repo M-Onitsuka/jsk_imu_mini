@@ -25,12 +25,7 @@ MadgwickAHRS():EstimatorAlgorithm()
 {
 beta = betaDef; // 2 * proportional gain (Kp)
 }
-  void update(const Vector3f& gyro, const Vector3f& acc, const Vector3f& mag){
-    acc_b_ = acc;
-    gyro_b_ = gyro;
-    mag_b_ = mag;
-    estimation();
-  }
+
 virtual void  estimation()
   {
 #if ESTIMATE_METHOD == ACC_GYRO_MAG
